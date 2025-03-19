@@ -50,7 +50,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'MyWebAPP'
+          app-name: 'PowerWebAPP1'
           slot-name: 'Production'
           package: '${{ github.workspace }}/MyWebAPP/*.war'  # Corrected path to the WAR file
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1B74C441E26C46A59963C51D8CD321BE }}

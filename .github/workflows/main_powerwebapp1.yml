@@ -30,8 +30,8 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: java-app
-          path: '${{ github.workspace }}'
+          name: MyWebAPP  # Changed from java-app to MyWebAPP
+          path: '${{ github.workspace }}/MyWebApp/target/*.war'  # Ensure correct path to the WAR file
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,13 +44,13 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: MyWebAPP
-      
+          name: MyWebAPP  # Changed to match the upload name
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'MyWebAPP'
           slot-name: 'Production'
-          package: '*.war'
+          package: '${{ github.workspace }}/MyWebAPP/*.war'  # Corrected path to the WAR file
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1B74C441E26C46A59963C51D8CD321BE }}

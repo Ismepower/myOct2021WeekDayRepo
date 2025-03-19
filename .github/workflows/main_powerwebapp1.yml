@@ -28,10 +28,10 @@ jobs:
         run: mvn clean install -f MyWebApp/pom.xml
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
-          name: MyWebAPP  # Changed from java-app to MyWebAPP
-          path: '${{ github.workspace }}/MyWebApp/target/*.war'  # Ensure correct path to the WAR file
+          name: MyWebAPP  # Ensure this matches with download step
+          path: '${{ github.workspace }}/MyWebApp/target/*.war'  # Ensure correct path to WAR file
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,9 +42,9 @@ jobs:
     
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4  # Updated to v4
         with:
-          name: MyWebAPP  # Changed to match the upload name
+          name: MyWebAPP  # Ensure this matches the uploaded artifact name
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
